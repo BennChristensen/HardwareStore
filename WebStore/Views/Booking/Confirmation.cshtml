@@ -1,0 +1,41 @@
+﻿@model HardwareStoreCommon.Models.Booking
+
+@{
+    ViewBag.Title = "Confirmation";
+}
+
+<h2>Bekræftigelse</h2>
+
+<div>
+    <h4>Din reservation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PickUpDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PickUpDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RentPeriod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RentPeriod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index", "Home")
+</p>

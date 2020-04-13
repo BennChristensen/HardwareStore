@@ -1,0 +1,28 @@
+﻿@model WebStore.Models.BookingViewModel
+
+@{
+    ViewBag.Title = "Confirm";
+}
+
+<h2>Bekræft reservationen</h2>
+@using (Html.BeginForm("ConfirmReservation", "Booking"))
+{
+    @Html.AntiForgeryToken()
+    <div class="card col-md-4">
+        <img src="@Url.Content(Model.Tool.ImgSrc)" class="card-img-top" alt="@Model.Tool.Name">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Tool.Name</h5>
+            <p class="">Samlet leje @Model.TotalPrice kr.</p>
+            <p class="">Depositum @Model.Tool.Deposit kr.</p>
+            <p class="">Afhentning @Model.PickUpDate.ToLongDateString()</p>
+            <div>
+                @Html.HiddenFor(m => m.CustomerId)
+                @Html.HiddenFor(m => m.Tool.Id)
+                @Html.HiddenFor(m => m.PickUpDate)
+                @Html.HiddenFor(m => m.RentDays)
+            </div>
+            <input type="submit" value="Bekræft reservationen" class="btn btn-success" />
+        </div>
+    </div>
+}
+

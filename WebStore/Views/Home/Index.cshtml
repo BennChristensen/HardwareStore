@@ -1,0 +1,42 @@
+﻿@using WebStore.Models
+@model WebStore.Models.HomeViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>EAAA Udlejning af havemaskiner</h1>
+    <p class="lead">Erhvervsakademi Aarhus havemaskine udlejning udlejer havemaskiner til favorable priser</p>
+</div>
+
+<div class="row">
+    @foreach(var tool in Model.Tools)
+    {
+        <div class="card col-md-4">
+            <img src="@Url.Content(tool.ImgSrc)" class="card-img-top" alt="@tool.Name">
+            <div class="card-body">
+                <h5 class="card-title">@tool.Name</h5>
+                <p class="card-text">@tool.Description</p>
+                <p class="badge badge-primary">Leje per døgn @tool.PricePerDay,-</p>
+                @if (Model.Customer != null)
+                {
+                    using (Html.BeginForm("Book", "Booking"))
+                    {
+                        @Html.AntiForgeryToken()
+                        Model.ToolId = tool.Id;
+                        <div>
+                            @Html.HiddenFor(m => m.Customer.Id)
+                            @Html.HiddenFor(m => m.ToolId)
+                        </div>
+                        <input type="submit" value="Reserver" class="btn btn-success" />
+                    }
+                }
+            </div>
+        </div>
+    }
+</div>
+@if (Model.Customer == null)
+{
+    @Html.Partial("_Login", new LoginViewModel())
+}

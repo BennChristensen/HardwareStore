@@ -1,0 +1,89 @@
+﻿<Window x:Class="HardwareStoreManagerApp.Views.CreateCustomer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HardwareStoreManagerApp.Views"
+        mc:Ignorable="d"
+        Title="CreateCustomer" Height="450" Width="600">
+    <Grid Background="BlanchedAlmond">
+        <Grid.Resources>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="Padding" Value="30, 10, 0, 0"/>
+                <Setter Property="Margin" Value="0, 10"/>
+                <Setter Property="VerticalContentAlignment" Value="Top"/>
+            </Style>
+            <Style x:Key="ValidationError" TargetType="Label">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Foreground" Value="Red"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Padding" Value="2, 5, 0, 5"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="2, 10, 2, 5"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Padding" Value="20, 10"/>
+                <Setter Property="Margin" Value="5, 10"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label>Navn</Label>
+        <Label Grid.Row="1">Adresse</Label>
+        <Label Grid.Row="2">e-mail</Label>
+        <Label Grid.Row="3">Bruger navn</Label>
+        <StackPanel Grid.Column="1">
+            <TextBox Text="{Binding Path=Customer.Name, Mode=OneWayToSource}" GotFocus="OnNameGotFocus"/>
+            <Label Margin="0" Style="{StaticResource ValidationError}" 
+                   Content="{Binding Path=ValidationErrorOnName}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <TextBox  Text="{Binding Path=Customer.Address, Mode=OneWayToSource}"/>
+            <Label Margin="0" Style="{StaticResource ValidationError}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="2">
+        <TextBox Text="{Binding Path=Customer.Email, Mode=OneWayToSource}"/>
+            <Label Margin="0" Style="{StaticResource ValidationError}"
+                   Content="{Binding Path=ValidationErrorOnEmail}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="3">
+            <TextBox Text="{Binding Path=Customer.UserName, Mode=OneWayToSource}" GotFocus="OnUserNameGotFocus"/>
+            <Label Margin="0" Style="{StaticResource ValidationError}"
+                   Content="{Binding Path=ValidationErrorOnUserName}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Background="PaleVioletRed" IsCancel="True" Click="OnCancelClicked">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+                Annuller
+            </Button>
+            <Button Background="MediumSeaGreen"  Click="OnCreateCustomerClicked">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+                Opret Kunde
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
