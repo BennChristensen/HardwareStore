@@ -16,8 +16,8 @@ namespace HardwareStoreManagerApp.Model
         public Customer SelectedCustomer { get; set; }
         public Booking SelectedBooking { get; set; }
         
-        private Boolean handoutBtnIsEnabled;
-        public Boolean HandoutBtnIsEnabled
+        private bool handoutBtnIsEnabled;
+        public bool HandoutBtnIsEnabled
         {
             get
             { 
@@ -30,8 +30,8 @@ namespace HardwareStoreManagerApp.Model
             }
         }
 
-        private Boolean returnBtnIsEnabled;
-        public Boolean ReturnBtnIsEnabled
+        private bool returnBtnIsEnabled;
+        public bool ReturnBtnIsEnabled
         {
             get
             {

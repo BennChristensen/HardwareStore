@@ -33,7 +33,9 @@ namespace HardwareStoreManagerApp
         {
             InitializeComponent();
             _dbContext = new HardwareStoreContext();
-            _dbContext.Customers.Load();
+            _dbContext.Customers.Include(c => c.Bookings
+            //.Where(b => b.Status != Booking.BookingStatus.Returned)
+            .Select(b => b.Tool)).Load();
             //TODO: Set up search filter
             //var view = CollectionViewSource.GetDefaultView(_dbContext.Customers);
             this._viewModel = new MainWindowViewModel
@@ -53,12 +55,12 @@ namespace HardwareStoreManagerApp
         private void OnCustomerSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _viewModel.SelectedCustomer = e.AddedItems[0] as Customer;
-            _dbContext.Customers.Attach(_viewModel.SelectedCustomer);
-            _dbContext.Entry(_viewModel.SelectedCustomer)
-                .Collection(c => c.Bookings)
-                .Query().Where(b => b.Status != Booking.BookingStatus.Returned)
-                .Include(b => b.Tool)
-                .Load();
+            //_dbContext.Customers.Attach(_viewModel.SelectedCustomer);
+            //_dbContext.Entry(_viewModel.SelectedCustomer)
+            //    .Collection(c => c.Bookings)
+            //    .Query().Where(b => b.Status != Booking.BookingStatus.Returned)
+            //    .Include(b => b.Tool)
+            //    .Load();
             //BookingsList.DataContext = _viewModel.SelectedCustomer.Bookings;
         }
 
@@ -105,17 +107,19 @@ namespace HardwareStoreManagerApp
                 if(_viewModel.SelectedBooking.Status == Booking.BookingStatus.HandedOut)
                 {
                     _viewModel.ReturnBtnIsEnabled = true;
+                    _viewModel.HandoutBtnIsEnabled = false;
                 }
                 if(_viewModel.SelectedBooking.Status == Booking.BookingStatus.Reserved)
                 {
                     _viewModel.HandoutBtnIsEnabled = true;
+                    _viewModel.ReturnBtnIsEnabled = false;
                 }
             }
             else
             {
                 _viewModel.SelectedBooking = null;
-                HandOutBtn.IsEnabled = false;
-                ReturnBtn.IsEnabled = false;
+                _viewModel.HandoutBtnIsEnabled = false;
+                _viewModel.HandoutBtnIsEnabled = false;
             }
         }
     }

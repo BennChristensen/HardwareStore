@@ -89,20 +89,20 @@
                 </ListView>
                 <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal"
                             HorizontalAlignment="Right">
-                    <Button Name="HandOutBtn" Click="OnHandOutClicked">
+                    <Button Name="HandOutBtn" Click="OnHandOutClicked" IsEnabled="{Binding Path=HandoutBtnIsEnabled, Mode=OneWay}">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5"/>
                             </Style>
                         </Button.Resources>
-                        Udlever</Button>
-                    <Button Name="ReturnBtn" Click="OnReturnedClicked">
+                        Udlevere</Button>
+                    <Button Name="ReturnBtn" Click="OnReturnedClicked" IsEnabled="{Binding Path=ReturnBtnIsEnabled, Mode=OneWay}">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5"/>
                             </Style>
                         </Button.Resources>
-                        Returner</Button>
+                        Returnere</Button>
                 </StackPanel>
             </Grid>
         </TabItem>
